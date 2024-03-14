@@ -7,10 +7,12 @@ export default function SignUp() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // as soon submit was hit formData updated with key value pair
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-
+ // as soon as formData got updated , post method was sent to server
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,7 +24,7 @@ export default function SignUp() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+      }); // respose of server is stored in res : look in the api/auth/signup
       const data = await res.json();
       console.log(data);
       setLoading(false);
@@ -75,7 +77,7 @@ export default function SignUp() {
           <span className='text-blue-500'>Sign in</span>
         </Link>
       </div>
-      <p className='text-red-700 mt-5'>{error && 'Something went wrong!'}</p>
+      <p className='text-red-700 mt-5'>{error && 'Already Registered user'}</p>
     </div>
   );
 }
